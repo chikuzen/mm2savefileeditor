@@ -435,6 +435,8 @@
                 character[key] = dv.getUint32(val[0], true);
             }
         }
+        character["Skill_1"] &= 0x0F;
+        character["Skill_2"] >>= 4;
         return character;
     }
 
@@ -443,7 +445,7 @@
         for (const key of ["Name", "Level", "SL", "AC", "Thiev"]) {
             box.querySelector(`#e-${key}`).textContent = cha[key];
         }
-        for (const key of ["Sex", "Align", "Race", "Cond"]) {
+        for (const key of ["Sex", "Align", "Race", "Cond", "Skill_1", "Skill_2"]) {
             box.querySelector(`#e-${key}`).children[cha[key]].selected = true;
         }
         for (const key of ["Age", "Mgt", "Mgt_cur", "Int", "Int_cur", "Per", "Per_cur", "End", "End_cur", "Spd", "Spd_cur", "Acy", "Acy_cur", "Lck", "Lck_cur", "HP", "HP_cur", "SP", "SP_cur", "Exp", "Gold","Food", "Gems"]) {
@@ -451,8 +453,6 @@
         }
         box.querySelector("#e-Town").textContent = town[cha["Town"]];
         box.querySelector("#e-Class").textContent = jobclass[cha["Class"]];
-        box.querySelector("#e-Skill_1").children[cha.Skill_1 & 0x0F].selected = true;
-        box.querySelector("#e-Skill_2").children[cha.Skill_2 >> 4].selected = true;
     }
 
     function setEquipped(box) {
