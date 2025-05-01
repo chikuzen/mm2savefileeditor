@@ -586,11 +586,11 @@
 
     function modifyBuffer() {
         for (let idx = 0; idx < 48; ++idx) {
-            const dv = new DataView(buffer, idx * 130, 130);
             const character = charData[idx];
             if (character === null) continue;
+            const dv = new DataView(buffer, idx * 130, 130);
             for (const key in character) {
-                if (key === "Name") continue;
+                if (["Name", "Skill_1", "Skill_2"].includes(key)) continue;
                 const val = offsetTable[key];
                 if (val[1] === 1) {
                     dv.setUint8(val[0], character[key]);
@@ -600,6 +600,7 @@
                     dv.setUint32(val[0], character[key], true);
                 }
             }
+            dv.setUint8(80, character["Skill_1"] | (character["Skill_2"] << 4));
         }
     }
 
@@ -641,7 +642,6 @@
 
     d.querySelector(".char-edit_update_btn").addEventListener("click", function(){
         updateCharacter();
-        //d.querySelector(".char-edit").style.display = "none";
     });
 
     window.addEventListener("load", function(){
