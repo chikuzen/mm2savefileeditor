@@ -1,0 +1,232 @@
+* {
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  padding: 20px 20px 100px;
+  font-family: serif;
+  min-height: 100vh;
+}
+
+h1 {
+  text-align: center;
+}
+
+button {
+  cursor: pointer;
+}
+
+.upload {
+  text-align: center;
+  margin-top: 50px;
+}
+.upload_btn {
+  pointer-events: none;
+  padding: 0.5em;
+  margin-left: 20px;
+}
+.selected .upload_btn {
+  pointer-events: auto;
+}
+
+.content {
+  display: none;
+}
+.content.loaded {
+  display: block;
+}
+
+.download {
+  text-align: center;
+  margin-top: 40px;
+}
+.download_btn {
+  padding: 0.5em;
+}
+
+.tables {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+@media (min-width: 1100px) {
+  .tables {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.char-table {
+  margin: 40px auto 0;
+  border-collapse: collapse;
+  border-spacing: 0;
+  border: 1px solid #000;
+  text-align: center;
+}
+@media (min-width: 1100px) {
+  .char-table {
+    margin: 40px 5px 0;
+  }
+}
+.char-table caption {
+  padding: 6px;
+  font-size: 1.25em;
+}
+.char-table thead {
+  border-bottom: 1px double #000;
+}
+.char-table th, .char-table td {
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  padding: 0.25em 0.5em;
+  font-size: 13px;
+}
+.char-table td {
+  height: 2.5em;
+}
+
+.edit {
+  padding: 0 0.3em;
+}
+
+.th-name {
+  width: 11em;
+}
+
+.char-edit {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 100;
+  padding: 20px;
+  display: none;
+  place-items: center;
+}
+.char-edit_box {
+  width: 100%;
+  max-width: 600px;
+  background: #FFF;
+  padding: 50px 20px 20px;
+}
+.char-edit_close {
+  font-size: 30px;
+  font-weight: 100;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 30px;
+  height: 30px;
+  line-height: 1;
+  border: none;
+  outline: none;
+  background: none;
+  grid: block;
+  place-items: center;
+}
+.char-edit #e-Name {
+  font-weight: 700;
+  font-size: 120%;
+}
+.char-edit_item {
+  font-size: 14px;
+  margin: 10px 20px 0 0;
+}
+.char-edit_row {
+  width: 100%;
+  display: flex;
+}
+.char-edit_row_w {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.char-edit_row_w .char-edit_item {
+  margin-right: 0;
+}
+.char-edit_hr {
+  margin: 10px 0;
+}
+.char-edit_above {
+  width: 100%;
+  display: flex;
+}
+.char-edit_above_left {
+  width: 30%;
+}
+.char-edit_above_right {
+  width: 70%;
+}
+.char-edit input, .char-edit select {
+  padding: 2px;
+  font-size: 14px;
+}
+.char-edit input[type=number] {
+  text-align: right;
+}
+.char-edit .w3 {
+  width: 2.5em;
+  display: inline-block;
+}
+.char-edit .w4 {
+  width: 3.5em;
+}
+.char-edit .w5 {
+  width: 5em;
+}
+.char-edit .w10 {
+  width: 8em;
+}
+.char-edit_bellow {
+  display: flex;
+  justify-content: space-between;
+}
+.char-edit_eq {
+  width: calc(50% - 5px);
+  border-collapse: collapse;
+  border: 1px solid #000;
+}
+.char-edit_eq caption {
+  font-size: 12px;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+.char-edit_eq th, .char-edit_eq td {
+  font-size: 12px;
+  border: 1px solid #000;
+  text-align: center;
+  padding: 2px;
+}
+.char-edit_eq td {
+  height: 25px;
+}
+.char-edit_eq input {
+  padding: 0 2px;
+}
+.char-edit_iname {
+  width: 50%;
+}
+.char-edit_chg, .char-edit_pls {
+  width: 25%;
+}
+.char-edit_update {
+  text-align: center;
+  margin-top: 20px;
+}
+.char-edit_update_btn {
+  padding: 5px 10px;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  font-size: 10px;
+}

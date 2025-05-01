@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Might and Magic book Ⅱ Savefile Editor</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/script.js" defer></script>
+</head>
+
+<body>
+<h1>Might and Magic book Ⅱ Savefile Editor</h1>
+<div class="upload">
+  <input type="file" accept=".DAT" class="upload_input">
+  <button type="button" class="upload_btn">LOAD A ROSTER.DAT</button>
+</div>
+
+<div class="content">
+  <div class="tables">
+    <table class="char-table">
+      <caption>Player Characters</caption>
+      <thead>
+        <tr>
+          <th class="th-edit"></th>
+          <th class="th-name">Name</th>
+          <th>Sex</th>
+          <th>Alignment</th>
+          <th>Race</th>
+          <th>Age</th>
+          <th>Class</th>
+          <th>Level</th>
+        </tr>
+      </thead>
+      <tbody class="players"></tbody>
+    </table>
+    <table class="char-table">
+      <caption>Hirelings</caption>
+      <thead>
+        <tr>
+          <th class="th-edit"></th>
+          <th class="th-name">Name</th>
+          <th>Sex</th>
+          <th>Alignment</th>
+          <th>Race</th>
+          <th>Age</th>
+          <th>Class</th>
+          <th>Level</th>
+        </tr>
+      </thead>
+      <tbody class="hirelings"></tbody>
+    </table>
+  </div>
+
+  <div class="download">
+    <button type="button" class="download_btn">SAVE THE MODIFIED ROSTER.DAT</button>
+  </div>
+</div>
+
+<div class="char-edit">
+  <div class="char-edit_box">
+    <button type="button" class="char-edit_close">✖</button>
+    <div class="char-edit_row_w">
+      <div class="char-edit_item" id="e-Name"></div>
+      <div class="char-edit_item">town: <span id="e-Town"></span></div>
+    </div>
+    <div class="char-edit_row_w">
+      <div class="char-edit_item">
+          <select id="e-Sex">
+            <option value="0">Male</option>
+            <option value="1">Female</option>
+          </select>
+      </div>
+      <div class="char-edit_item">
+        <select id="e-Align">
+          <option value="0">Good</option>
+          <option value="1">Neutral</option>
+          <option value="3">Evil</option>
+        </select>
+      </div>
+      <div class="char-edit_item">
+        <select id="e-Race">
+          <option value="0">Human</option>
+          <option value="1">Elf</option>
+          <option value="2">Dwarf</option>
+          <option value="3">Gnome</option>
+          <option value="4">H-Orc</option>
+        </select>
+      </div>
+      <div class="char-edit_item"><span id="e-Class"></span></div>
+      <div class="char-edit_item">Age: <input id="e-Age" class="w4" type="number" value="24"></div>
+    </div>
+    <div class="char-edit_above">
+      <div class="char-edit_above_left">
+        <div class="char-edit_item"><span class="w3">Mgh:</span><input id="e-Mgt_cur" type="number" class="w4" value="200">&nbsp/&nbsp<input id="e-Mgt" type="number" class="w4" value="200"></div>
+        <div class="char-edit_item"><span class="w3">Int:</span><input id="e-Int_cur" type="number" class="w4" value="200">&nbsp/&nbsp<input id="e-Int" type="number" class="w4" value="200"></div>
+        <div class="char-edit_item"><span class="w3">Per:</span><input id="e-Per_cur" type="number" class="w4" value="200">&nbsp/&nbsp<input id="e-Per" type="number" class="w4" value="200"></div>
+        <div class="char-edit_item"><span class="w3">End:</span><input id="e-End_cur" type="number" class="w4" value="200">&nbsp/&nbsp<input id="e-End" type="number" class="w4" value="200"></div>
+        <div class="char-edit_item"><span class="w3">Spd:</span><input id="e-Spd_cur" type="number" class="w4" value="200">&nbsp/&nbsp<input id="e-Spd" type="number" class="w4" value="200"></div>
+        <div class="char-edit_item"><span class="w3">Acy:</span><input id="e-Acy_cur" type="number" class="w4" value="200">&nbsp/&nbsp<input id="e-Acy" type="number" class="w4" value="200"></div>
+        <div class="char-edit_item"><span class="w3">Lck:</span><input id="e-Lck_cur" type="number" class="w4" value="200">&nbsp/&nbsp<input id="e-Lck" type="number" class="w4" value="200"></div>
+      </div>
+      <div class="char-edit_above_right">
+        <div class="char-edit_row">
+          <div class="char-edit_item">Lvl: <span id="e-Level"></span></div>
+          <div class="char-edit_item">SL : <spna id="e-SL"></spna></div>
+          <div class="char-edit_item">AC: <span id="e-AC"></span></div>
+          <div class="char-edit_item">Cond:
+            <select id="e-Cond">
+              <option value="0">Good</option>
+              <option value="1">Cursed</option>
+              <option value="2">Silenced</option>
+              <option value="3">Diseased</option>
+              <option value="4">Poisoned</option>
+              <option value="5">Asleep</option>
+              <option value="6">Paralyzed</option>
+              <option value="7">Dead</option>
+              <option value="8">Stone</option>
+              <option value="9">Eradicated</option>
+            </select>
+          </div>
+        </div>
+        <div class="char-edit_row_w">
+          <div class="char-edit_item"><span class="w3">HP:</span><input id="e-HP" class="w5" type="number" value="12345">&nbsp/&nbsp<input id="e-HP_cur" class="w5" type="number" value="12345"></div>
+          <div class="char-edit_item"><span class="w3">SP:</span><input id="e-SP" class="w5" type="number" value="1234">&nbsp/&nbsp<input id="e-SP_cur" class="w5" type="number" value="1234"></div>
+        </div>
+        <div class="char-edit_row">
+          <div class="char-edit_item">Exp: <input id="e-Exp" class="w10" type="number" value="1234567890" max="4294967295" min="0"></div>
+          <div class="char-edit_item">Gold: <input id="e-Gold" class="w10" type="number" value="1234567890" max="4294967295" min="0"></div>
+        </div>
+        <div class="char-edit_row">
+          <div class="char-edit_item">Food: <input id="e-Food" class="w4" type="number" value="40" max="40" min="0"></div>
+          <div class="char-edit_item">Gems: <input id="e-Gems" class="w5" type="number" value="40" min="0" max="65535"></div>
+        </div>
+        <div class="char-edit_item">Thievery: <span id="e-Thiev"></span>%</div>
+        <div class="char-edit_row">
+          <div class="char-edit_item">skill:
+            <select id="e-Skill_1">
+              <option value="0">No skill</option>
+              <option value="1">Arms Mater</option>
+              <option value="2">Athlete"</option>
+              <option value="3">Cartographer</option>
+              <option value="4">Crusader</option>
+              <option value="5">Diplomat</option>
+              <option value="6">Gambler</option>
+              <option value="7">Gladiator</option>
+              <option value="8">Hero/Heroine</option>
+              <option value="9">Linguist</option>
+              <option value="10">Merchant</option>
+              <option value="11">Mountaineer</option>
+              <option value="12">Navigator"</option>
+              <option value="13">Pathfinder</option>
+              <option value="14">Pickpocket</option>
+              <option value="15">Solider</option>
+            </select>
+          </div>
+          <div class="char-edit_item">skill:
+            <select id="e-Skill_2">
+              <option value="0">No skill</option>
+              <option value="1">Arms Mater</option>
+              <option value="2">Athlete"</option>
+              <option value="3">Cartographer</option>
+              <option value="4">Crusader</option>
+              <option value="5">Diplomat</option>
+              <option value="6">Gambler</option>
+              <option value="7">Gladiator</option>
+              <option value="8">Hero/Heroine</option>
+              <option value="9">Linguist</option>
+              <option value="10">Merchant</option>
+              <option value="11">Mountaineer</option>
+              <option value="12">Navigator"</option>
+              <option value="13">Pathfinder</option>
+              <option value="14">Pickpocket</option>
+              <option value="15">Solider</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr class="char-edit_hr">
+    <div class="char-edit_bellow">
+      <table class="char-edit_eq equipped">
+        <caption>equipped</caption>
+        <thead>
+          <tr>
+            <th class="char-edit_iname">Item name</th>
+            <th class="char-edit_chg">chg</th>
+            <th class="char-edit_pls">pls</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td id="e-Eq_1"></td>
+            <td id="e-Eq_1_ch"></td>
+            <td id="e-Eq_1_p"></td>
+          </tr>
+          <tr>
+            <td id="e-Eq_2"></td>
+            <td id="e-Eq_2_ch"></td>
+            <td id="e-Eq_2_p"></td>
+          </tr>
+          <tr>
+            <td id="e-Eq_3"></td>
+            <td id="e-Eq_3_ch"></td>
+            <td id="e-Eq_3_p"></td>
+          </tr>
+          <tr>
+            <td id="e-Eq_4"></td>
+            <td id="e-Eq_4_ch"></td>
+            <td id="e-Eq_4_p"></td>
+          </tr>
+          <tr>
+            <td id="e-Eq_5"></td>
+            <td id="e-Eq_5_ch"></td>
+            <td id="e-Eq_5_p"></td>
+          </tr>
+          <tr>
+            <td id="e-Eq_6"></td>
+            <td id="e-Eq_6_ch"></td>
+            <td id="e-Eq_6_p"></td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="char-edit_eq backpack">
+        <caption>backpack</caption>
+        <thead>
+          <tr>
+            <th class="char-edit_iname">Item name</th>
+            <th class="char-edit_chg">chg</th>
+            <th class="char-edit_pls">pls</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td id="e-Bp_1_sel"></td>
+            <td><input id="e-Bp_1_ch" type="number" class="w4" value="0" min="0"></td>
+            <td>+<input id="e-Bp_1_p" type="number" class="w4" value="10" min="0"></td>
+          </tr>
+          <tr>
+            <td id="e-Bp_2_sel"></td>
+            <td><input id="e-Bp_2_ch" type="number" class="w4" value="0" min="0"></td>
+            <td>+<input id="e-Bp_2_p" type="number" class="w4" value="10" min="0"></td>
+          </tr>
+          <tr>
+            <td id="e-Bp_3_sel"></td>
+            <td><input id="e-Bp_3_ch" type="number" class="w4" value="0" min="0"></td>
+            <td>+<input id="e-Bp_3_p" type="number" class="w4" value="10" min="0"></td>
+          </tr>
+          <tr>
+            <td id="e-Bp_4_sel"></td>
+            <td><input id="e-Bp_4_ch" type="number" class="w4" value="0" min="0"></td>
+            <td>+<input id="e-Bp_4_p" type="number" class="w4" value="10" min="0"></td>
+          </tr>
+          <tr>
+            <td id="e-Bp_5_sel"></td>
+            <td><input id="e-Bp_5_ch" type="number" class="w4" value="0" min="0"></td>
+            <td>+<input id="e-Bp_5_p" type="number" class="w4" value="10" min="0"></td>
+          </tr>
+          <tr>
+            <td id="e-Bp_6_sel"></td>
+            <td><input id="e-Bp_6_ch" type="number" class="w4" value="0" min="0"></td>
+            <td>+<input id="e-Bp_6_p" type="number" class="w4" value="10" min="0"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="char-edit_update">
+      <button type="button" class="char-edit_update_btn">UPDATE CHARACTER</button>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <p class="copyrights">Might and Magic book II Savefile Editor ver 0.0.0 by Oka Motofumi</p>
+</footer>
+</body>
+</html>
