@@ -452,7 +452,7 @@
             return;
         }
         const sp = Math.max(0, cha.Level - 6 * ["Paladin", "Archer"].includes(cc));
-        cha.SP = sp * getAttrBonus(["Archer", "Sorcerer"].includes(cc) ? cha.Int : cha.Per);
+        cha.SP = sp * (3 + getAttrBonus(["Archer", "Sorcerer"].includes(cc) ? cha.Int : cha.Per));
     }
 
     function setEditBox(box) {
@@ -461,7 +461,6 @@
             box.querySelector(`#e-${key}`).textContent = cha[key];
         }
         for (const key of ["Sex", "Align", "Race", "Cond", "Skill_1", "Skill_2"]) {
-            console.log(key);
             box.querySelector(`#e-${key}`).children[cha[key]].selected = true;
         }
         for (const key of ["Age", "Mgt", "Mgt_cur", "Int", "Int_cur", "Per", "Per_cur", "End", "End_cur", "Spd", "Spd_cur", "Acy", "Acy_cur", "Lck", "Lck_cur", "HP", "HP_cur", "SP_cur", "Exp", "Gold","Food", "Gems"]) {
@@ -684,7 +683,27 @@
         }
     });
 
-    window.addEventListener("load", function(){
+    function createSelectbox() {
+        const category = [
+            {"name": "Sex",     "list": sex},
+            {"name": "Align",   "list": alignment},
+            {"name": "Race",    "list": race},
+            {"name": "Cond",    "list": condition},
+            {"name": "Skill_1", "list": skill},
+            {"name": "Skill_2", "list": skill},
+        ];
+        for (const c of category) {
+            const s = d.querySelector(`#e-${c.name}`);
+            c.list.forEach((e, i)=>{
+                const o = d.createElement("option");
+                o.value = i;
+                o.textContent = e;
+                s.appendChild(o);
+            });
+        }
+    }
+
+    function createBackpackSelectbox() {
         const sl = d.createElement("select");
         for (let i = 0; i < 256; ++i) {
             const o = d.createElement("option");
@@ -701,5 +720,9 @@
             });
             d.querySelector(`#${id}_sel`).appendChild(sc);
         }
+    }
+    window.addEventListener("load", function(){
+        createSelectbox();
+        createBackpackSelectbox();
     });
 })(document);
