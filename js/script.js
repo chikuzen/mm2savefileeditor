@@ -715,6 +715,7 @@
             const id = `e-Bp_${i}`;
             const sc = sl.cloneNode(true);
             sc.setAttribute("id", id);
+            sc.setAttribute("title", `equipped item ${i}`);
             sc.addEventListener("change", function(){
                 setMaxValuesBP(this);
             });

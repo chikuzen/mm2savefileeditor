@@ -11,7 +11,7 @@
 <body>
 <h1>Might and Magic book Ⅱ Savefile Editor</h1>
 <div class="upload">
-  <input type="file" accept=".DAT" class="upload_input">
+  <input type="file" accept=".DAT" class="upload_input" title="select a ROSTER.DAT">
   <button type="button" class="upload_btn">LOAD A ROSTER.DAT</button>
 </div>
 
@@ -65,13 +65,13 @@
     </div>
     <div class="char-edit_row_w">
       <div class="char-edit_item">
-          <select id="e-Sex"></select>
+          <select id="e-Sex" title="Sex"></select>
       </div>
       <div class="char-edit_item">
-        <select id="e-Align"></select>
+        <select id="e-Align" title="Alignment"></select>
       </div>
       <div class="char-edit_item">
-        <select id="e-Race"></select>
+        <select id="e-Race" title="Race"></select>
       </div>
       <div class="char-edit_item"><span id="e-Class"></span></div>
       <div class="char-edit_item">Age: <input id="e-Age" class="w4" type="number" value="24"></div>
@@ -92,7 +92,7 @@
           <div class="char-edit_item">SL : <spna id="e-SL"></spna></div>
           <div class="char-edit_item">AC: <span id="e-AC"></span></div>
           <div class="char-edit_item">Cond:
-            <select id="e-Cond"></select>
+            <select id="e-Cond" title="Condition"></select>
           </div>
         </div>
         <div class="char-edit_row">
@@ -110,10 +110,10 @@
         <div class="char-edit_item">Thievery: <span id="e-Thiev"></span>%</div>
         <div class="char-edit_row">
           <div class="char-edit_item">Skill:
-            <select id="e-Skill_1"></select>
+            <select id="e-Skill_1" title="First skill"></select>
           </div>
           <div class="char-edit_item">Skill:
-            <select id="e-Skill_2"></select>
+            <select id="e-Skill_2" title="Second skill"></select>
           </div>
         </div>
       </div>
