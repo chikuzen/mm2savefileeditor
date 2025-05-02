@@ -74,7 +74,7 @@
         <select id="e-Align">
           <option value="0">Good</option>
           <option value="1">Neutral</option>
-          <option value="3">Evil</option>
+          <option value="2">Evil</option>
         </select>
       </div>
       <div class="char-edit_item">
@@ -91,13 +91,13 @@
     </div>
     <div class="char-edit_above">
       <div class="char-edit_above_left">
-        <div class="char-edit_item"><span class="w3">Mgh:</span><input id="e-Mgt_cur" type="number" class="w4" value="200">&nbsp/&nbsp<input id="e-Mgt" type="number" class="w4" value="200"></div>
-        <div class="char-edit_item"><span class="w3">Int:</span><input id="e-Int_cur" type="number" class="w4" value="200">&nbsp/&nbsp<input id="e-Int" type="number" class="w4" value="200"></div>
-        <div class="char-edit_item"><span class="w3">Per:</span><input id="e-Per_cur" type="number" class="w4" value="200">&nbsp/&nbsp<input id="e-Per" type="number" class="w4" value="200"></div>
-        <div class="char-edit_item"><span class="w3">End:</span><input id="e-End_cur" type="number" class="w4" value="200">&nbsp/&nbsp<input id="e-End" type="number" class="w4" value="200"></div>
-        <div class="char-edit_item"><span class="w3">Spd:</span><input id="e-Spd_cur" type="number" class="w4" value="200">&nbsp/&nbsp<input id="e-Spd" type="number" class="w4" value="200"></div>
-        <div class="char-edit_item"><span class="w3">Acy:</span><input id="e-Acy_cur" type="number" class="w4" value="200">&nbsp/&nbsp<input id="e-Acy" type="number" class="w4" value="200"></div>
-        <div class="char-edit_item"><span class="w3">Lck:</span><input id="e-Lck_cur" type="number" class="w4" value="200">&nbsp/&nbsp<input id="e-Lck" type="number" class="w4" value="200"></div>
+        <div class="char-edit_item"><span class="w3">Mgh:</span><input id="e-Mgt_cur" type="number" class="w4" min="1">&nbsp/&nbsp<input id="e-Mgt" type="number" class="w4" min="1"></div>
+        <div class="char-edit_item"><span class="w3">Int:</span><input id="e-Int_cur" type="number" class="w4" min="1">&nbsp/&nbsp<input id="e-Int" type="number" class="w4" min="1"></div>
+        <div class="char-edit_item"><span class="w3">Per:</span><input id="e-Per_cur" type="number" class="w4" min="1">&nbsp/&nbsp<input id="e-Per" type="number" class="w4" min="1"></div>
+        <div class="char-edit_item"><span class="w3">End:</span><input id="e-End_cur" type="number" class="w4" min="1">&nbsp/&nbsp<input id="e-End" type="number" class="w4" min="1"></div>
+        <div class="char-edit_item"><span class="w3">Spd:</span><input id="e-Spd_cur" type="number" class="w4" min="1">&nbsp/&nbsp<input id="e-Spd" type="number" class="w4" min="1"></div>
+        <div class="char-edit_item"><span class="w3">Acy:</span><input id="e-Acy_cur" type="number" class="w4" min="1">&nbsp/&nbsp<input id="e-Acy" type="number" class="w4" min="1"></div>
+        <div class="char-edit_item"><span class="w3">Lck:</span><input id="e-Lck_cur" type="number" class="w4" min="1">&nbsp/&nbsp<input id="e-Lck" type="number" class="w4" min="1"></div>
       </div>
       <div class="char-edit_above_right">
         <div class="char-edit_row">
@@ -119,9 +119,9 @@
             </select>
           </div>
         </div>
-        <div class="char-edit_row_w">
-          <div class="char-edit_item"><span class="w3">HP:</span><input id="e-HP" class="w5" type="number" value="12345">&nbsp/&nbsp<input id="e-HP_cur" class="w5" type="number" value="12345"></div>
-          <div class="char-edit_item"><span class="w3">SP:</span><input id="e-SP" class="w5" type="number" value="1234">&nbsp/&nbsp<input id="e-SP_cur" class="w5" type="number" value="1234"></div>
+        <div class="char-edit_row">
+          <div class="char-edit_item"><span class="w3">HP:</span><input id="e-HP_cur" class="w5" type="number" min="0" max="65535">&nbsp/&nbsp<input id="e-HP" class="w5" type="number" min="1" max="65535"></div>
+          <div class="char-edit_item"><span class="w3">SP:</span><input id="e-SP_cur" class="w5" type="number" min="0" max="65535">&nbsp/&nbsp<span id="e-SP"></span></div>
         </div>
         <div class="char-edit_row">
           <div class="char-edit_item">Exp: <input id="e-Exp" class="w10" type="number" value="1234567890" max="4294967295" min="0"></div>
