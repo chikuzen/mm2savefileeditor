@@ -187,9 +187,14 @@ button {
   justify-content: space-between;
 }
 .char-edit_eq {
-  width: calc(50% - 5px);
   border-collapse: collapse;
   border: 1px solid #000;
+}
+.char-edit_eq.equipped {
+  width: calc(45% - 5px);
+}
+.char-edit_eq.backpack {
+  width: calc(55% - 5px);
 }
 .char-edit_eq caption {
   font-size: 12px;

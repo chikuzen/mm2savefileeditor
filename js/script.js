@@ -50,6 +50,12 @@
         "Eq_4_p": [55, 1],
         "Eq_5_p": [56, 1],
         "Eq_6_p": [57, 1],
+        "Eq_1_al": [52, 1],
+        "Eq_2_al": [53, 1],
+        "Eq_3_al": [54, 1],
+        "Eq_4_al": [55, 1],
+        "Eq_5_al": [56, 1],
+        "Eq_6_al": [57, 1],
         "Bp_1": [58, 1],
         "Bp_2": [59, 1],
         "Bp_3": [60, 1],
@@ -68,6 +74,12 @@
         "Bp_4_p": [73, 1],
         "Bp_5_p": [74, 1],
         "Bp_6_p": [75, 1],
+        "Bp_1_al": [70, 1],
+        "Bp_2_al": [71, 1],
+        "Bp_3_al": [72, 1],
+        "Bp_4_al": [73, 1],
+        "Bp_5_al": [74, 1],
+        "Bp_6_al": [75, 1],
         "Skill_1": [80, 1],
         "Skill_2": [80, 1],
         "SP": [90, 2],
@@ -142,6 +154,8 @@
         "Pickpocket",
         "Solider",
     ];
+
+    const item_al = ["", "E", "G", "N"];
 
     const items = [
     //["name", max charges, max plus, AC]
@@ -474,15 +488,17 @@
         const cha = charData[targetIdx];
         for (let i = 1; i <= 6; ++i) {
             const key = `Eq_${i}`;
-            let c0 = "", c1 = "", c2 = "";
+            let c0 = "", c1 = "", c2 = "", c3 = "";
             if (cha[key] !== 0) {
                 c0 = `${items[cha[key]][0]}`;
                 c1 = `${cha[`${key}_ch`]}`;
                 c2 = `+${cha[`${key}_p`]}`;
+                c3 = item_al[cha[`${key}_al`]];
             }
             box.querySelector(`#e-${key}`).textContent = c0;
             box.querySelector(`#e-${key}_ch`).textContent = c1;
             box.querySelector(`#e-${key}_p`).textContent = c2;
+            box.querySelector(`#e-${key}_al`).textContent = c3;
         }
     }
 
@@ -491,6 +507,7 @@
         const id = sl.getAttribute("id");
         d.querySelector(`#${id}_ch`).max = item[1];
         d.querySelector(`#${id}_p`).max = item[2];
+        d.querySelector(`#${id}_al`).disabled = (item[2] === 0);
     }
 
     function setBackPack(box) {
@@ -502,6 +519,7 @@
             sl.children[cha[key]].selected = true;
             box.querySelector(`${id}_ch`).value = cha[`${key}_ch`];
             box.querySelector(`${id}_p`).value = cha[`${key}_p`];
+            box.querySelector(`${id}_al`).children[cha[`${key}_al`]].selected = true;
             setMaxValuesBP(sl, id);
         }
     }
@@ -607,6 +625,13 @@
                 character[key] = dv.getUint32(val[0], true);
             }
         }
+        for (let i = 1; i <= 6; ++i) {
+            character[`Eq_${i}_p`] &= 0x3F;
+            character[`Eq_${i}_al`] >>= 6;
+            character[`Bp_${i}_p`] &= 0x3F;
+            character[`Bp_${i}_al`] >>= 6;
+        }
+        character["Eq_1_ch"]
         character["Skill_1"] &= 0x0F;
         character["Skill_2"] >>= 4;
         return character;
@@ -649,6 +674,7 @@
             const dv = new DataView(buffer, idx * 130, 130);
             for (const key in character) {
                 if (["Name", "Skill_1", "Skill_2"].includes(key)) continue;
+                if (key.includes("_p") || key.includes("_al")) continue;
                 const val = offsetTable[key];
                 if (val[1] === 1) {
                     dv.setUint8(val[0], character[key]);
@@ -659,6 +685,11 @@
                 }
             }
             dv.setUint8(80, character["Skill_1"] | (character["Skill_2"] << 4));
+            for (let i = 1; i <= 6; ++i) {
+                dv.setUint8(51 + i, character[`Eq_${i}_p`] | (character[`Eq_${i}_al`] << 6));
+                dv.setUint8(69 + i, character[`Bp_${i}_p`] | (character[`Bp_${i}_al`] << 6));
+            }
+
         }
     }
 
@@ -719,6 +750,21 @@
             sc.addEventListener("change", function(){
                 setMaxValuesBP(this);
             });
+            d.querySelector(`#${id}_sel`).appendChild(sc);
+        }
+
+        const al = d.createElement("select");
+        for (let i = 0; i < 4; ++i) {
+            const o = d.createElement("option");
+            o.value = i;
+            o.textContent = item_al[i];
+            al.appendChild(o);
+        }
+        for (let i = 1; i <= 6; ++i) {
+            const id = `e-Bp_${i}_al`;
+            const sc = al.cloneNode(true);
+            sc.setAttribute("id", id);
+            sc.setAttribute("title", "item's alignment");
             d.querySelector(`#${id}_sel`).appendChild(sc);
         }
     }

@@ -182,9 +182,14 @@ button {
         justify-content: space-between;
     }
     &_eq {
-        width: calc(50% - 5px);
         border-collapse: collapse;
         border: 1px solid #000;
+        &.equipped {
+            width: calc(45% - 5px);
+        }
+        &.backpack {
+            width: calc(55% - 5px);
+        }
         caption {
             font-size: 12px;
             font-weight: 500;
