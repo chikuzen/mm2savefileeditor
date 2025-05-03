@@ -23,6 +23,14 @@
         "Acy_cur": [111, 1],
         "Lck": [21, 1],
         "Lck_cur": [112, 1],
+        "R_Magic": [22, 1],
+        "R_Fire": [23, 1],
+        "R_Elec": [24, 1],
+        "R_Cold": [25, 1],
+        "R_Energy": [26, 1],
+        "R_Sleep": [27, 1],
+        "R_Poison": [28, 1],
+        "R_Acid": [29, 1],
         "Thiev": [30, 1],
         "Level": [32, 1],
         "Age": [33, 1],
@@ -471,13 +479,20 @@
 
     function setEditBox(box) {
         const cha = charData[targetIdx];
-        for (const key of ["Name", "Level", "SL", "AC", "SP", "Thiev"]) {
+        for (const key of [
+            "Name", "Level", "SL", "AC", "SP", "Thiev", "R_Magic", "R_Fire",
+            "R_Elec", "R_Cold", "R_Energy", "R_Sleep", "R_Poison", "R_Acid"
+        ]) {
             box.querySelector(`#e-${key}`).textContent = cha[key];
         }
         for (const key of ["Sex", "Align", "Race", "Cond", "Skill_1", "Skill_2"]) {
             box.querySelector(`#e-${key}`).children[cha[key]].selected = true;
         }
-        for (const key of ["Age", "Mgt", "Mgt_cur", "Int", "Int_cur", "Per", "Per_cur", "End", "End_cur", "Spd", "Spd_cur", "Acy", "Acy_cur", "Lck", "Lck_cur", "HP", "HP_cur", "SP_cur", "Exp", "Gold","Food", "Gems"]) {
+        for (const key of [
+            "Age", "Mgt", "Mgt_cur", "Int", "Int_cur", "Per", "Per_cur", "End",
+            "End_cur", "Spd", "Spd_cur", "Acy", "Acy_cur", "Lck", "Lck_cur", "HP",
+            "HP_cur", "SP_cur", "Exp", "Gold","Food", "Gems"
+        ]) {
             box.querySelector(`#e-${key}`).value = `${cha[key]}`;
         }
         box.querySelector("#e-Town").textContent = town[cha["Town"]];
@@ -582,8 +597,13 @@
 
     function updateCharacter() {
         const cha = charData[targetIdx];
+        const ignores = [
+            "Town", "Class", "SP", "AC", "Level", "SL", "Thiev",
+            "R_Magic", "R_Fire", "R_Elec", "R_Cold",
+            "R_Energy", "R_Sleep", "R_Poison", "R_Acid",
+        ];
         for (const key in offsetTable) {
-            if (["Town", "Class", "SP", "AC", "Level", "SL", "Thiev"].includes(key)) {
+            if (ignores.includes(key)) {
                 continue;
             }
             if (key.includes("Eq_")) {
