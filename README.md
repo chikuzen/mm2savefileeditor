@@ -6,3 +6,5 @@ usage:
   3. press "UPDATE CHARACTER".
   4. Repeat steps 2 and 3 as many times as you like.
   5. press the "SAVE THE MODIFIED ROSTER.DAT" button at the bottom of the page.
+
+Web page - https://chikuzen.github.io/mm2savefileeditor/
