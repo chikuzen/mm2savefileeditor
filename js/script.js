@@ -109,6 +109,7 @@
     const sex = [
         "Male",
         "Female",
+        "Neutral",
     ];
     const alignment = [
         "Good",
