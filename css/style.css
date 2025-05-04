@@ -140,10 +140,12 @@ button {
 .char-edit_row {
   width: 100%;
   display: flex;
+  align-items: center;
 }
 .char-edit_row_w {
   width: 100%;
   display: flex;
+  align-items: center;
   justify-content: space-between;
 }
 .char-edit_row_w .char-edit_item {
@@ -221,7 +223,7 @@ button {
   padding: 2px 6px;
 }
 .char-edit_eq td {
-  height: 25px;
+  height: 30px;
   padding: 2px;
 }
 .char-edit_eq input {

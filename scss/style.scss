@@ -135,10 +135,12 @@ button {
     &_row {
         width: 100%;
         display: flex;
+        align-items: center;
     }
     &_row_w {
         width: 100%;
         display: flex;
+        align-items: center;
         justify-content: space-between;
         .char-edit_item {
             margin-right: 0;
@@ -215,7 +217,7 @@ button {
             padding: 2px 6px;
         }
         td {
-            height: 25px;
+            height: 30px;
             padding: 2px;
         }
         input {

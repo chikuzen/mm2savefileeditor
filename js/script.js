@@ -96,7 +96,7 @@
         "HP": [96, 2],
         "HP_cur": [94, 2],
         "Exp": [98, 4],
-        "Gold": [102, 4]
+        "Gold": [102, 4],
     };
     const town = [
         "no where",
@@ -497,23 +497,33 @@
         }
         box.querySelector("#e-Town").textContent = town[cha["Town"]];
         box.querySelector("#e-Class").textContent = jobclass[cha["Class"]];
+        [
+            box.querySelector(".gold_or_cost").textContent,
+            box.querySelector("#e-Gold").disabled
+        ] = [
+            ["Cost", true],
+            ["Gold", false]
+        ][(targetIdx < 24) | 0];
     }
 
     function setEquipped(box) {
         const cha = charData[targetIdx];
         for (let i = 1; i <= 6; ++i) {
             const key = `Eq_${i}`;
-            let c0 = "", c1 = "", c2 = "", c3 = "";
-            if (cha[key] !== 0) {
-                c0 = `${items[cha[key]][0]}`;
-                c1 = `${cha[`${key}_ch`]}`;
-                c2 = `+${cha[`${key}_p`]}`;
-                c3 = item_al[cha[`${key}_al`]];
-            }
-            box.querySelector(`#e-${key}`).textContent = c0;
-            box.querySelector(`#e-${key}_ch`).textContent = c1;
-            box.querySelector(`#e-${key}_p`).textContent = c2;
-            box.querySelector(`#e-${key}_al`).textContent = c3;
+            [
+                box.querySelector(`#e-${key}`).textContent,
+                box.querySelector(`#e-${key}_ch`).textContent,
+                box.querySelector(`#e-${key}_p`).textContent,
+                box.querySelector(`#e-${key}_al`).textContent,
+            ] = [
+                ["", "", "", ""],
+                [
+                    `${items[cha[key]][0]}`,
+                    `${cha[`${key}_ch`]}`,
+                    `+${cha[`${key}_p`]}`,
+                    item_al[cha[`${key}_al`]],
+                ]
+            ][(cha[key] !== 0) | 0];
         }
     }
 
@@ -597,13 +607,11 @@
 
     function updateCharacter() {
         const cha = charData[targetIdx];
-        const ignores = [
-            "Town", "Class", "SP", "AC", "Level", "SL", "Thiev",
-            "R_Magic", "R_Fire", "R_Elec", "R_Cold",
-            "R_Energy", "R_Sleep", "R_Poison", "R_Acid",
-        ];
         for (const key in offsetTable) {
-            if (ignores.includes(key)) {
+            if (["Town", "Class", "SP", "AC", "Level", "SL",
+                "Thiev","R_Magic", "R_Fire", "R_Elec", "R_Cold",
+                "R_Energy", "R_Sleep", "R_Poison", "R_Acid",
+            ].includes(key)) {
                 continue;
             }
             if (key.includes("Eq_")) {
@@ -651,7 +659,6 @@
             character[`Bp_${i}_p`] &= 0x3F;
             character[`Bp_${i}_al`] >>= 6;
         }
-        character["Eq_1_ch"]
         character["Skill_1"] &= 0x0F;
         character["Skill_2"] >>= 4;
         return character;
