@@ -474,8 +474,17 @@
             cha.SP = 0;
             return;
         }
-        const sp = Math.max(0, cha.Level - 6 * ["Paladin", "Archer"].includes(cc));
-        cha.SP = sp * (3 + getAttrBonus(["Archer", "Sorcerer"].includes(cc) ? cha.Int : cha.Per));
+        if (["Paladin", "Archer"].includes(cc) && cha.Level < 7) {
+            cha.SP = 0;
+            return;
+        }
+        const attr = {
+            "Paladin": cha.Per,
+            "Archer": cha.Int,
+            "Cleric": cha.Per,
+            "Sorcerer": cha.Int,
+        };
+        cha.SP = cha.Level * (3 + getAttrBonus(attr[cc]));
     }
 
     function setEditBox(box) {
