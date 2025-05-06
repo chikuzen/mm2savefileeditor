@@ -164,6 +164,18 @@
         "Solider",
     ];
 
+    const HP_table = {
+    //"Class": [Middlegate, Sandsober, Tundara, Vulcania, Atlantium]
+        "Knight": [3, 5, 5, 6, 9],
+        "Paladin": [2, 4, 5, 5, 7],
+        "Archer": [2, 4, 5, 5, 7],
+        "Cleric": [1, 2, 2, 3, 5],
+        "Sorcerer": [0, 1, 1, 2, 3],
+        "Robber": [1, 2, 2, 3, 5],
+        "Ninja": [1, 2, 2, 3, 5],
+        "Barbarian": [5, 7, 7, 9, 12],
+    };
+
     const item_al = ["", "E", "G", "N"];
 
     const items = [
@@ -443,11 +455,11 @@
 
     function getAttrBonus(attr) {
         const table = [
-            {min: 150, div: 25, base: 15},
-            {min:  30, div: 15, base:  7},
-            {min:  22, div:  4, base:  5},
-            {min:  19, div:  3, base:  4},
-            {min:  11, div:  2, base:  0},
+            {min: 151, div: 25, base: 15},
+            {min:  31, div: 15, base:  7},
+            {min:  23, div:  4, base:  5},
+            {min:  20, div:  3, base:  4},
+            {min:  14, div:  2, base:  1},
         ];
         for (const r of table) {
             if (attr >= r.min) {
@@ -461,8 +473,9 @@
         let ac = getAttrBonus(cha.Spd_cur);
         for (let i = 1; i <= 6; ++i) {
             const key = `Eq_${i}`;
-            if (items[cha[key]][3] > 0) {
-                ac += items[cha[key]][3] + cha[`${key}_p`];
+            const item_ac = items[cha[key]][3];
+            if (item_ac > 0) {
+                ac += item_ac + cha[`${key}_p`];
             }
         }
         cha.AC = ac;
@@ -470,7 +483,13 @@
 
     function recalcurateSP(cha) {
         const cc = jobclass[cha.Class];
-        if (["Knight", "Robber", "Ninja", "Barbarian"].includes(cc)) {
+        const attr = {
+            "Paladin": cha.Per,
+            "Archer": cha.Int,
+            "Cleric": cha.Per,
+            "Sorcerer": cha.Int,
+        };
+        if (!(cc in attr)) {
             cha.SP = 0;
             return;
         }
@@ -478,12 +497,6 @@
             cha.SP = 0;
             return;
         }
-        const attr = {
-            "Paladin": cha.Per,
-            "Archer": cha.Int,
-            "Cleric": cha.Per,
-            "Sorcerer": cha.Int,
-        };
         cha.SP = cha.Level * (3 + getAttrBonus(attr[cc]));
     }
 
